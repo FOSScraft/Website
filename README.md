@@ -165,4 +165,5 @@ To contribute to the website:
 - Discord: https://fosscraft.org/discord
 - Matrix: https://fosscraft.org/matrix
 - Reddit: https://fosscraft.org/reddit
-- GitHub: https://github.com/FOSScraft/FOSScraft
+- GitHub: https://github.com/FOSScraft
+
