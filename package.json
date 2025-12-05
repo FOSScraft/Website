@@ -1,0 +1,25 @@
+{
+  "name": "fosscraft-website",
+  "version": "1.0.0",
+  "description": "Official website for FOSScraft - Free and Open-Source Minecraft Launcher",
+  "author": "FOSScraft Contributors",
+  "license": "GPL-3.0-only",
+  "homepage": "https://fosscraft.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FOSScraft/FOSScraft"
+  },
+  "keywords": [
+    "minecraft",
+    "launcher",
+    "open-source",
+    "free",
+    "fosscraft"
+  ],
+  "scripts": {
+    "serve": "python -m http.server 8000",
+    "build": "echo 'Website is static - no build needed'",
+    "test": "echo 'Run tests with your preferred testing framework'"
+  },
+  "devDependencies": {}
+}
