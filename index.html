@@ -6,7 +6,7 @@
     <meta name="description" content="FOSScraft - A free and open-source Minecraft launcher. Easily manage multiple Minecraft installations with a modern, streamlined interface.">
     <meta name="keywords" content="Minecraft, launcher, open-source, free, FOSScraft">
     <meta name="author" content="FOSScraft">
-    <title>FOSScraft - Free & Open-Source Minecraft Launcher</title>
+    <title>FOSScraft - A Free & Open-Source Minecraft Launcher</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
@@ -15,14 +15,14 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h1>◆ FOSScraft</h1>
+                <h1><a href="index.html">FOSScraft</a></h1>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#download">Download</a></li>
                 <li><a href="#community">Community</a></li>
-                <li><a href="#build">Build</a></li>
+                <li><a href="compile.html">Build Guide</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
         </div>
@@ -136,24 +136,28 @@
     <section id="build" class="build">
         <div class="container">
             <h2>Building FOSScraft</h2>
-            <p class="section-intro">Want to build FOSScraft yourself? Check the platform-specific build instructions:</p>
+            <p class="section-intro">Want to build FOSScraft yourself? We have comprehensive guides for both Linux and Windows:</p>
             
             <div class="build-grid">
                 <div class="build-card">
-                    <h3>Windows</h3>
-                    <a href="https://fosscraft.org/wiki/development/build-instructions/windows/" class="btn btn-build">View Guide</a>
+                    <h3>Compilation Guide</h3>
+                    <p>Detailed step-by-step instructions for Linux and Windows</p>
+                    <a href="compile.html" class="btn btn-build">View Compilation Guide</a>
                 </div>
                 <div class="build-card">
-                    <h3>Linux</h3>
-                    <a href="https://fosscraft.org/wiki/development/build-instructions/linux/" class="btn btn-build">View Guide</a>
+                    <h3>Linux Build</h3>
+                    <p>Arch, Fedora, Debian, and openSUSE instructions</p>
+                    <a href="compile.html#linux" class="btn btn-build">Linux Guide</a>
                 </div>
                 <div class="build-card">
-                    <h3>macOS</h3>
-                    <a href="https://fosscraft.org/wiki/development/build-instructions/macos/" class="btn btn-build">View Guide</a>
+                    <h3>Windows Build</h3>
+                    <p>Visual Studio and Qt6 setup instructions</p>
+                    <a href="compile.html#windows" class="btn btn-build">Windows Guide</a>
                 </div>
                 <div class="build-card">
-                    <h3>OpenBSD</h3>
-                    <a href="https://fosscraft.org/wiki/development/build-instructions/openbsd/" class="btn btn-build">View Guide</a>
+                    <h3>Additional Resources</h3>
+                    <p>Configuration, troubleshooting, and FAQ</p>
+                    <a href="compile.html#troubleshooting" class="btn btn-build">Troubleshooting</a>
                 </div>
             </div>
 
@@ -180,10 +184,6 @@
                         <p>Thanks to Netlify for providing excellent web services as part of their Open Source program</p>
                     </div>
                     <div class="sponsor">
-                        <h4>Prism Launcher</h4>
-                        <p>FOSScraft is derived from Prism Launcher. All credit for the original codebase goes to the Prism Launcher team and contributors.</p>
-                    </div>
-                    <div class="sponsor">
                         <h4>Open Collective</h4>
                         <p>Support FOSScraft by becoming a backer at <a href="https://opencollective.com/fosscraft">Open Collective</a></p>
                     </div>
@@ -198,10 +198,10 @@
                 </div>
 
                 <h3>License</h3>
-                <p>All launcher code is available under the <a href="https://github.com/FOSScraft/FOSScraft/blob/develop/LICENSE">GPL-3.0-only license</a>. The logo and related assets are under the CC BY-SA 4.0 license.</p>
+                <p>All launcher code is available under the <a href="https://github.com/FOSScraft/FOSScraft/blob/develop/LICENSE">GPL-3.0-only license</a>. Related assets are under the CC BY-SA 4.0 license.</p>
 
-                <h3>Forking & Redistributing</h3>
-                <p>You are free to fork, redistribute, and provide custom builds as long as you follow the terms of the GPLv3 license. If you fork FOSScraft, please make it clear that your version is not endorsed by or affiliated with the FOSScraft project.</p>
+                <h3>Building & Customization</h3>
+                <p>FOSScraft is open for anyone to build and customize. When building for your distribution, set the <code>Launcher_BUILD_PLATFORM</code> to a slug representing your distribution (e.g., <code>archlinux</code>, <code>fedora</code>).</p>
             </div>
         </div>
     </section>
@@ -209,7 +209,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 FOSScraft. Originally based on Prism Launcher. Licensed under GPLv3.</p>
+            <p>&copy; 2025 FOSScraft. Licensed under GPLv3.</p>
             <p><a href="https://github.com/FOSScraft/FOSScraft">GitHub Repository</a> | <a href="https://fosscraft.org">Official Website</a></p>
         </div>
     </footer>
@@ -217,5 +217,3 @@
     <script src="js/script.js"></script>
 </body>
 </html>
-
-

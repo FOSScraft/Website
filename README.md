@@ -163,6 +163,6 @@ To contribute to the website:
 ## Contact
 
 - Discord: https://fosscraft.org/discord
-- GitHub: https://github.com/FOSScraft
-
-
+- Matrix: https://fosscraft.org/matrix
+- Reddit: https://fosscraft.org/reddit
+- GitHub: https://github.com/FOSScraft/FOSScraft

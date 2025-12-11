@@ -485,7 +485,6 @@ You have:
 
 Created: December 2025
 For: FOSScraft Project
-Based on: Prism Launcher
 License: GPLv3
 
 Visit: [fosscraft.org](https://fosscraft.org)

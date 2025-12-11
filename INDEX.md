@@ -2,7 +2,7 @@
 
 ## Welcome! 👋
 
-This directory (`c:\fosscraft\website`) contains a complete, professional website for **FOSScraft** - a free and open-source Minecraft launcher based on Prism Launcher.
+This directory (`c:\fosscraft\website`) contains a complete, professional website for **FOSScraft** - a free and open-source Minecraft launcher.
 
 ---
 
@@ -151,8 +151,7 @@ Drag the `website` folder to [netlify.com](https://netlify.com) ✨
 
 **about.html**
 - Project mission
-- Credits to Prism Launcher
-- 6 sponsors/partners
+- 5 sponsors/partners
 - License information
 
 ### CSS Styling (css/style.css)
@@ -375,9 +374,8 @@ See **DEPLOYMENT.md** for detailed instructions.
 
 ## 📜 License
 
-- **Code**: GPLv3 (same as FOSScraft)
+- **Code**: GPLv3
 - **Assets**: CC BY-SA 4.0
-- **Derived from**: Prism Launcher
 
 ---
 

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive guide for compiling FOSScraft from source on Linux and Windows">
+    <meta name="keywords" content="FOSScraft, compile, build, Linux, Windows, tutorial, guide">
+    <meta name="author" content="FOSScraft">
+    <title>FOSScraft Compilation Guide - Build from Source</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <style>
+        .compile-guide {
+            background: #0f172a;
+            padding: 2rem 0;
+        }
+        
+        .guide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .toc {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border-left: 4px solid #10b981;
+            color: #f1f5f9;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            color: #06b6d4;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .toc li {
+            padding: 0.5rem 0;
+        }
+        
+        a {
+            color: #10b981;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }  
+
+        a:hover {
+            color: #06b6d4;
+            text-decoration: underline;
+        }
+
+        footer a,
+        .warning a,
+        .info a {
+            color: #94a3b8;
+        }
+
+        footer a:hover,
+        .warning a:hover,
+        .info a:hover {
+            color: #cbd5e1;
+        }
+        
+        .section {
+            background: #1e293b;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            color: #f1f5f9;
+        }
+        
+        .section h2 {
+            color: #06b6d4;
+            border-bottom: 2px solid #10b981;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #10b981;
+            margin-top: 1.5rem;
+        }
+        
+        .section h4 {
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+        
+        .code-block {
+            background: #0f172a;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border: 1px solid #334155;
+        }
+        
+        .code-block code {
+            color: #f8f8f2;
+        }
+        
+        .system-requirements {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        
+        .req-box {
+            background: #334155;
+            padding: 1.5rem;
+            border-radius: 5px;
+            border-left: 4px solid #10b981;
+            color: #f1f5f9;
+        }
+        
+        .req-box h4 {
+            margin-top: 0;
+            color: #06b6d4;
+        }
+        
+        .req-box ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .req-box li {
+            margin: 0.3rem 0;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .step-list li {
+            counter-increment: step-counter;
+            margin: 1.5rem 0;
+            padding-left: 3rem;
+            position: relative;
+        }
+        
+        .step-list li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #10b981;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #334155;
+            margin: 1rem 0;
+            overflow-x: auto;
+            color: #f1f5f9;
+        }
+        
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #cbd5e1;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .tab-button:hover {
+            background: #334155;
+            color: #f1f5f9;
+        }
+        
+        .tab-button.active {
+            color: #10b981;
+            border-bottom-color: #10b981;
+        }
+        
+        .tab-content {
+            display: none;
+            margin: 1.5rem 0;
+            color: #f1f5f9;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .warning {
+            background: rgba(255, 152, 0, 0.15);
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #fca5a5;
+        }
+        
+        .info {
+            background: rgba(33, 150, 243, 0.15);
+            border-left: 4px solid #2196F3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #93c5fd;
+        }
+        
+        .success {
+            background: rgba(16, 185, 129, 0.15);
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #86efac;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            color: #f1f5f9;
+        }
+        
+        table th, table td {
+            border: 1px solid #334155;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        table th {
+            background: #334155;
+            font-weight: 600;
+            color: #06b6d4;
+        }
+        
+        table tr:nth-child(even) {
+            background: #0f172a;
+        }
+        
+        @media (max-width: 768px) {
+            .system-requirements {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1><a href="index.html">FOSScraft</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="download.html">Download</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="compile.html">Build Guide</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="compile-guide">
+        <div class="guide-container">
+            <!-- Header -->
+            <section class="section">
+                <h1>FOSScraft Compilation Guide</h1>
+                <p>A comprehensive guide to building FOSScraft from source code on Linux and Windows platforms.</p>
+                <p><strong>Last Updated:</strong> December 2025 | <strong>Applies to:</strong> Latest (develop branch)</p>
+            </section>
+
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#requirements">System Requirements</a></li>
+                    <li><a href="#linux">Linux Compilation</a></li>
+                    <li><a href="#windows">Windows Compilation</a></li>
+                    <li><a href="#configuration">Build Configuration</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                </ul>
+            </div>
+
+            <!-- Overview Section -->
+            <section class="section" id="overview">
+                <h2>Overview</h2>
+                <p>FOSScraft is built using CMake and requires a modern C++ compiler, Qt6, and various dependencies. This guide provides step-by-step instructions for compiling FOSScraft on your system.</p>
+                
+                <h3>What You'll Need</h3>
+                <ul>
+                    <li><strong>CMake</strong> 3.21 or higher</li>
+                    <li><strong>Qt 6.x</strong> (6.4+ recommended)</li>
+                    <li><strong>C++ Compiler</strong> (GCC 11+, Clang 12+, or MSVC 2019+)</li>
+                    <li><strong>Git</strong> for version control</li>
+                    <li><strong>Java Development Kit (JDK)</strong> for some build components</li>
+                </ul>
+            </section>
+
+            <!-- System Requirements -->
+            <section class="section" id="requirements">
+                <h2>System Requirements</h2>
+
+                <h3>Linux</h3>
+                <div class="system-requirements">
+                    <div class="req-box">
+                        <h4>Recommended Specifications</h4>
+                        <ul>
+                            <li><strong>CPU:</strong> Multi-core (4+ cores)</li>
+                            <li><strong>RAM:</strong> 4GB minimum (8GB+ recommended)</li>
+                            <li><strong>Disk:</strong> 5-10GB for source and build</li>
+                            <li><strong>OS:</strong> Modern Linux with glibc 2.31+</li>
+                        </ul>
+                    </div>
+                    <div class="req-box">
+                        <h4>Supported Distributions</h4>
+                        <ul>
+                            <li>Arch Linux / Manjaro</li>
+                            <li>Fedora / RHEL / CentOS</li>
+                            <li>Debian / Ubuntu 20.04+</li>
+                            <li>openSUSE</li>
+                            <li>Gentoo</li>
+                            <li>Alpine Linux</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Windows</h3>
+                <div class="system-requirements">
+                    <div class="req-box">
+                        <h4>Recommended Specifications</h4>
+                        <ul>
+                            <li><strong>CPU:</strong> Multi-core (4+ cores)</li>
+                            <li><strong>RAM:</strong> 4GB minimum (8GB+ recommended)</li>
+                            <li><strong>Disk:</strong> 10-15GB for source and build</li>
+                            <li><strong>OS:</strong> Windows 10 / 11 (64-bit)</li>
+                            <li><strong>Admin:</strong> Admin access required</li>
+                        </ul>
+                    </div>
+                    <div class="req-box">
+                        <h4>Visual Studio Requirements</h4>
+                        <ul>
+                            <li>Visual Studio 2019 or 2022</li>
+                            <li>Community Edition (free)</li>
+                            <li>C++ workload with MSVC</li>
+                            <li>CMake support</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Linux Compilation -->
+            <section class="section" id="linux">
+                <h2>Linux Compilation</h2>
+
+                <h3>Step 1: Install Dependencies</h3>
+                <p>Select your distribution below to see the appropriate commands:</p>
+
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab(event, 'arch')">Arch</button>
+                    <button class="tab-button" onclick="switchTab(event, 'fedora')">Fedora</button>
+                    <button class="tab-button" onclick="switchTab(event, 'debian')">Debian/Ubuntu</button>
+                    <button class="tab-button" onclick="switchTab(event, 'opensuse')">openSUSE</button>
+                </div>
+
+                <div id="arch" class="tab-content active">
+                    <div class="code-block"><code>sudo pacman -S base-devel cmake qt6-base qt6-svg qt6-imageformats git jdk-openjdk</code></div>
+                </div>
+
+                <div id="fedora" class="tab-content">
+                    <div class="code-block"><code>sudo dnf groupinstall "Development Tools" "Development Libraries"
+sudo dnf install cmake qt6-qtbase qt6-qtsvg git java-latest-openjdk-devel</code></div>
+                </div>
+
+                <div id="debian" class="tab-content">
+                    <div class="code-block"><code>sudo apt-get update
+sudo apt-get install build-essential cmake git openjdk-17-jdk-headless
+sudo apt-get install qt6-base-dev qt6-svg-dev libgl1-mesa-dev</code></div>
+                    <div class="info">
+                        For Ubuntu 22.04 or newer, Qt6 packages are available in the standard repository. Older versions may need Qt6 from the official Qt repository.
+                    </div>
+                </div>
+
+                <div id="opensuse" class="tab-content">
+                    <div class="code-block"><code>sudo zypper install gcc gcc-c++ cmake git java-17-openjdk-devel
+sudo zypper install libqt6-qtbase-devel libqt6-qtsvg-devel libqt6-qtimageformats-devel</code></div>
+                </div>
+
+                <h3>Step 2: Clone the Repository</h3>
+                <div class="code-block"><code>git clone https://github.com/FOSScraft/FOSScraft.git
+cd FOSScraft
+git submodule update --init --recursive</code></div>
+
+                <h3>Step 3: Create Build Directory</h3>
+                <div class="code-block"><code>mkdir build
+cd build</code></div>
+
+                <h3>Step 4: Configure with CMake</h3>
+                <div class="code-block"><code>cmake -DCMAKE_BUILD_TYPE=Release ..</code></div>
+
+                <h4>Optional CMake Flags:</h4>
+                <div class="code-block"><code># Build with debug information
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+
+# Specify custom installation prefix
+cmake -DCMAKE_INSTALL_PREFIX=/opt/fosscraft ..
+
+# Enable LTO for smaller binary
+cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_LTO=ON ..
+
+# Set platform identifier
+cmake -DCMAKE_BUILD_TYPE=Release -DLauncher_BUILD_PLATFORM=archlinux ..</code></div>
+
+                <h4>Platform Identifiers:</h4>
+                <table>
+                    <tr>
+                        <th>Distribution</th>
+                        <th>Identifier</th>
+                    </tr>
+                    <tr>
+                        <td>Arch Linux</td>
+                        <td><code>archlinux</code></td>
+                    </tr>
+                    <tr>
+                        <td>Fedora</td>
+                        <td><code>fedora</code></td>
+                    </tr>
+                    <tr>
+                        <td>Debian</td>
+                        <td><code>debian</code></td>
+                    </tr>
+                    <tr>
+                        <td>Ubuntu</td>
+                        <td><code>ubuntu</code></td>
+                    </tr>
+                    <tr>
+                        <td>openSUSE</td>
+                        <td><code>opensuse</code></td>
+                    </tr>
+                    <tr>
+                        <td>Gentoo</td>
+                        <td><code>gentoo</code></td>
+                    </tr>
+                    <tr>
+                        <td>NixOS</td>
+                        <td><code>nixpkgs</code></td>
+                    </tr>
+                </table>
+
+                <h3>Step 5: Build</h3>
+                <div class="code-block"><code># Single-threaded build
+make
+
+# Multi-threaded build (recommended - replace 4 with your CPU core count)
+make -j4
+
+# Alternative: using ninja (faster)
+ninja</code></div>
+
+                <h3>Step 6: Install</h3>
+                <div class="code-block"><code># Install to system
+sudo make install
+
+# Or install to custom directory
+make install</code></div>
+
+                <h3>Step 7: Run</h3>
+                <div class="code-block"><code># If installed to /usr/local
+fosscraft
+
+# If installed to custom location
+/opt/fosscraft/bin/fosscraft
+
+# Or run directly from build directory
+./launcher/FOSScraft</code></div>
+
+                <h4>Configuration Directory:</h4>
+                <p>FOSScraft will automatically create configuration files in:</p>
+                <div class="code-block"><code>~/.config/FOSScraft/</code></div>
+            </section>
+
+            <!-- Windows Compilation -->
+            <section class="section" id="windows">
+                <h2>Windows Compilation</h2>
+
+                <h3>Step 1: Install Visual Studio Build Tools</h3>
+                <ol class="step-list">
+                    <li>Download <a href="https://visualstudio.microsoft.com/downloads/" target="_blank">Visual Studio Community Edition</a></li>
+                    <li>Run the installer</li>
+                    <li>Select "Desktop development with C++"</li>
+                    <li>Ensure "MSVC v143 or later" and "CMake tools for Windows" are checked</li>
+                    <li>Complete installation (~10GB disk space)</li>
+                </ol>
+
+                <h3>Step 2: Install Qt6 for Windows</h3>
+                <p><strong>Option A: Using Qt Online Installer (Recommended)</strong></p>
+                <ol class="step-list">
+                    <li>Download <a href="https://www.qt.io/download-qt-installer" target="_blank">Qt Online Installer</a></li>
+                    <li>Create/login to Qt Account</li>
+                    <li>Select Components:
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Qt 6.x → MSVC 2022 64-bit (or MSVC 2019 if using VS2019)</li>
+                            <li>Developer and Designer Tools → CMake, Ninja</li>
+                        </ul>
+                    </li>
+                    <li>Note the installation path (e.g., <code>C:\Qt\6.x\msvc2022_64</code>)</li>
+                </ol>
+
+                <p style="margin-top: 1.5rem;"><strong>Option B: Using vcpkg</strong></p>
+                <div class="code-block"><code>git clone https://github.com/Microsoft/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+
+.\vcpkg install qt6-base:x64-windows qt6-svg:x64-windows qt6-imageformats:x64-windows</code></div>
+
+                <h3>Step 3: Clone Repository</h3>
+                <div class="code-block"><code>git clone https://github.com/FOSScraft/FOSScraft.git
+cd FOSScraft
+git submodule update --init --recursive</code></div>
+
+                <h3>Step 4: Create Build Directory</h3>
+                <div class="code-block"><code>mkdir build
+cd build</code></div>
+
+                <h3>Step 5: Configure with CMake</h3>
+                <p>Open "Developer Command Prompt for Visual Studio" and run:</p>
+                <div class="code-block"><code>REM With Qt from Online Installer
+cmake -G "Visual Studio 17 2022" -A x64 ^
+  -DCMAKE_PREFIX_PATH="C:\Qt\6.x\msvc2022_64" ^
+  -DCMAKE_BUILD_TYPE=Release ..</code></div>
+
+                <p style="margin-top: 1rem;"><strong>With vcpkg:</strong></p>
+                <div class="code-block"><code>cmake -G "Visual Studio 17 2022" -A x64 ^
+  -DCMAKE_TOOLCHAIN_FILE="C:\path\to\vcpkg\scripts\buildsystems\vcpkg.cmake" ^
+  -DCMAKE_BUILD_TYPE=Release ..</code></div>
+
+                <h4>CMake Flags Explanation:</h4>
+                <ul>
+                    <li><code>-G "Visual Studio 17 2022"</code> - Use Visual Studio 2022 (use 16 for VS2019)</li>
+                    <li><code>-A x64</code> - 64-bit architecture</li>
+                    <li><code>-DCMAKE_PREFIX_PATH</code> - Path to Qt installation</li>
+                    <li><code>-DCMAKE_BUILD_TYPE=Release</code> - Optimized build (use Debug for debugging)</li>
+                </ul>
+
+                <h3>Step 6: Build</h3>
+                <p><strong>Option A: Using CMake</strong></p>
+                <div class="code-block"><code>cmake --build . --config Release --parallel 4</code></div>
+
+                <p style="margin-top: 1rem;"><strong>Option B: Using Visual Studio</strong></p>
+                <div class="code-block"><code>REM Open in Visual Studio
+start FOSScraft.sln
+
+REM Or build from command line
+msbuild FOSScraft.sln /p:Configuration=Release /m:4</code></div>
+
+                <h3>Step 7: Run</h3>
+                <p>The executable is located at:</p>
+                <div class="code-block"><code>.\launcher\Release\FOSScraft.exe
+REM or
+.\launcher\Release\fosscraft.exe</code></div>
+
+                <h3>Creating a Portable Build</h3>
+                <div class="code-block"><code>REM From build directory
+cmake --install . --config Release --prefix ".\FOSScraft-portable"</code></div>
+                <p>The vcpkg or Qt deployment tool will handle runtime library copying.</p>
+            </section>
+
+            <!-- Build Configuration -->
+            <section class="section" id="configuration">
+                <h2>Build Configuration</h2>
+
+                <h3>Customizing API Keys and Features</h3>
+                <p>Edit <code>CMakeLists.txt</code> before building to customize:</p>
+                <div class="code-block"><code># Meta server URL
+set(Launcher_META_URL "https://meta.fosscraft.org/v1/")
+
+# News RSS feed
+set(Launcher_NEWS_RSS_URL "https://fosscraft.org/news/feed.xml")
+
+# Bug tracker
+set(Launcher_BUG_TRACKER_URL "https://github.com/FOSScraft/FOSScraft/issues")
+
+# Community links
+set(Launcher_DISCORD_URL "https://fosscraft.org/discord")
+set(Launcher_MATRIX_URL "https://fosscraft.org/matrix")
+set(Launcher_SUBREDDIT_URL "https://fosscraft.org/reddit")</code></div>
+
+                <h3>Platform-Specific Build Options</h3>
+                <div class="code-block"><code># Set for your distribution
+set(Launcher_BUILD_PLATFORM "archlinux")
+
+# Enable/disable features
+set(ENABLE_LTO ON)                    # Link Time Optimization
+set(CMAKE_BUILD_TYPE "Release")       # or "Debug"</code></div>
+            </section>
+
+            <!-- Troubleshooting -->
+            <section class="section" id="troubleshooting">
+                <h2>Troubleshooting</h2>
+
+                <h3>Linux Issues</h3>
+
+                <h4>"Qt6 not found" error</h4>
+                <div class="code-block"><code># Install qt6 development files for your distribution
+
+# Or manually specify Qt path
+cmake -DCMAKE_PREFIX_PATH=/usr/lib/cmake/Qt6 ..</code></div>
+
+                <h4>"java: command not found"</h4>
+                <div class="code-block"><code># Debian/Ubuntu
+sudo apt-get install default-jdk
+
+# Fedora
+sudo dnf install java-latest-openjdk-devel</code></div>
+
+                <h4>Out of memory during build</h4>
+                <div class="code-block"><code># Reduce parallel build jobs
+make -j2</code></div>
+
+                <h4>Missing development headers</h4>
+                <div class="code-block"><code># Ubuntu - install dev packages
+sudo apt-get install libgl1-mesa-dev libxkbcommon-x11-dev libxcb-* -y</code></div>
+
+                <h3>Windows Issues</h3>
+
+                <h4>"CMake not found"</h4>
+                <div class="warning">
+                    Ensure "CMake tools for Windows" is installed via Visual Studio Installer, or install CMake separately from <a href="https://cmake.org/download/">cmake.org</a>
+                </div>
+
+                <h4>"Qt6 not found"</h4>
+                <ul>
+                    <li>Verify Qt installation path in CMake configuration</li>
+                    <li>Ensure the correct MSVC version matches your Visual Studio version</li>
+                </ul>
+
+                <h4>"MSVC compiler not found"</h4>
+                <div class="warning">
+                    Open <strong>"Developer Command Prompt for Visual Studio"</strong> (not regular PowerShell). This sets up the correct compiler environment.
+                </div>
+
+                <h4>Build fails with "fatal error"</h4>
+                <div class="code-block"><code>cd build
+cmake --build . --config Release --clean-first
+cmake --build . --config Release --parallel 4</code></div>
+
+                <h4>Antivirus interference</h4>
+                <div class="warning">
+                    Some antivirus software may slow down builds significantly. Consider temporarily disabling during compilation.
+                </div>
+
+                <h3>General Issues</h3>
+
+                <h4>CMake configuration fails</h4>
+                <div class="code-block"><code>rm -rf build/*
+cmake -DCMAKE_BUILD_TYPE=Release ..</code></div>
+
+                <h4>Check compiler version</h4>
+                <div class="code-block"><code>gcc --version
+clang --version</code></div>
+
+                <h4>Check binary dependencies (Linux)</h4>
+                <div class="code-block"><code>ldd ./launcher/FOSScraft</code></div>
+
+                <h4>Check binary dependencies (Windows)</h4>
+                <div class="code-block"><code>objdump -p ./launcher/FOSScraft.exe | grep NEEDED</code></div>
+            </section>
+
+            <!-- Next Steps -->
+            <section class="section">
+                <h2>Next Steps</h2>
+
+                <h3>Post-Installation (Linux)</h3>
+                <div class="code-block"><code># Create desktop entry
+sudo cp launcher/resources/fosscraft.desktop /usr/share/applications/
+
+# Install man page
+sudo cp launcher/resources/fosscraft.6 /usr/share/man/man6/</code></div>
+
+                <h3>Getting Help</h3>
+                <ul>
+                    <li><a href="https://github.com/FOSScraft/FOSScraft/issues" target="_blank">Report Issues</a> - Found a bug?</li>
+                    <li><a href="https://fosscraft.org/discord" target="_blank">Discord Community</a> - Get help from community</li>
+                    <li><a href="https://github.com/FOSScraft/FOSScraft" target="_blank">GitHub Repository</a> - View source code</li>
+                </ul>
+
+                <h3>Contributing</h3>
+                <p>Want to help? Check <a href="https://github.com/FOSScraft/FOSScraft/blob/develop/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a> for guidelines.</p>
+            </section>
+
+            <!-- Additional Resources -->
+            <section class="section">
+                <h2>Additional Resources</h2>
+                <ul>
+                    <li><a href="https://fosscraft.org/wiki/" target="_blank">Official Wiki</a> - Comprehensive documentation</li>
+                    <li><a href="https://github.com/FOSScraft/FOSScraft" target="_blank">GitHub Repository</a> - View and fork source code</li>
+                    <li><a href="https://fosscraft.org/discord" target="_blank">Community Support</a> - Get help on Discord</li>
+                    <li><a href="#" onclick="window.location.href='index.html'">Back to Home</a> - Return to main website</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 FOSScraft. Licensed under GPLv3.</p>
+            <p><a href="https://github.com/FOSScraft/FOSScraft">GitHub Repository</a> | <a href="https://fosscraft.org">Official Website</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(evt, tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show current tab and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

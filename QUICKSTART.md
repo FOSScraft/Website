@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-This directory contains the complete website for **FOSScraft** - a free and open-source Minecraft launcher based on Prism Launcher.
+This directory contains the complete website for **FOSScraft** - a free and open-source Minecraft launcher.
 
 The website is built with:
 - **HTML5** for structure

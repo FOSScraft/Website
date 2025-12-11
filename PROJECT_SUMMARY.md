@@ -2,7 +2,7 @@
 
 ## 📋 What Has Been Created
 
-A complete, professional website for FOSScraft - a free and open-source Minecraft launcher derived from Prism Launcher.
+A complete, professional website for FOSScraft - a free and open-source Minecraft launcher.
 
 ## 📁 Complete Website Structure
 
