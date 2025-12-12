@@ -161,8 +161,9 @@ To contribute to the website:
 4. Submit a pull request
 
 ## Contact
-
+> *None of these links work at the moment, please be patient as I resolve this.*
 - Discord: https://fosscraft.org/discord
 - Matrix: https://fosscraft.org/matrix
 - Reddit: https://fosscraft.org/reddit
 - GitHub: https://github.com/FOSScraft/FOSScraft
+
